@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2019b"><title>Data Requirements</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.S1 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
+.S2 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
+.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S4 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px; padding: 0px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S5 { color: rgb(64, 64, 64); padding: 10px 0px 6px 17px; background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px; overflow-x: hidden; line-height: 16.996px;  }
+.embeddedOutputsErrorElement {min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsErrorElement.inlineElement {}
+.embeddedOutputsErrorElement.rightPaneElement {}
+.embeddedOutputsWarningElement{min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsWarningElement.inlineElement {}
+.embeddedOutputsWarningElement.rightPaneElement {}
+.diagnosticMessage-wrapper {font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 12px;}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType {color: rgb(255,100,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType a {color: rgb(255,100,0); text-decoration: underline;}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType {color: rgb(230,0,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType a {color: rgb(230,0,0); text-decoration: underline;}
+.diagnosticMessage-wrapper .diagnosticMessage-messagePart,.diagnosticMessage-wrapper .diagnosticMessage-causePart {white-space: pre-wrap;}
+.diagnosticMessage-wrapper .diagnosticMessage-stackPart {white-space: pre;}
+.embeddedOutputsTextElement,.embeddedOutputsVariableStringElement {white-space: pre; word-wrap: initial; min-height: 18px; max-height: 250px; overflow: auto;}
+.textElement,.rtcDataTipElement .textElement {padding-top: 3px;}
+.embeddedOutputsTextElement.inlineElement,.embeddedOutputsVariableStringElement.inlineElement {}
+.inlineElement .textElement {}
+.embeddedOutputsTextElement.rightPaneElement,.embeddedOutputsVariableStringElement.rightPaneElement {min-height: 16px;}
+.rightPaneElement .textElement {padding-top: 2px; padding-left: 9px;}
+.S6 { margin: 10px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S7 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px 4px 0px 0px; padding: 6px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>Data Requirements</span></h1><h2  class = 'S1'><span>Data Structure</span></h2><div  class = 'S2'><span>The toolbox assumes data are organized in a specific structure. This is an example of the structure for a reaching paradigm.</span></div><div  class = 'S2'><span>Data for the demo are from the </span><a href = "https://doi.org/10.1152/jn.00379.2021"><span>study</span></a><span> "Mixed matrix factorization: a novel algorithm for the extraction of kinematic-muscular synergies" by Alessandro Scano and collaborators, published in 2022 on Journal of Neurophysiology.</span></div><div  class = 'S2'><span>Here we selected a data subset of one participant, reaching towards 8 targets on the frontal plane. There are 10 repetitions of each trial.</span></div><div  class = 'S2'><span>Loading raw EMG  and kinematic data (reaching to 8 target in frontal plane)</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>load(</span><span style="color: rgb(160, 32, 240);">'data.mat'</span><span>);</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S4'><span style="white-space: pre;"><span>disp(data)</span></span></div><div  class = 'S5'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="A83B30C3" data-testid="output_0" data-width="1427" data-height="101" data-hashorizontaloverflow="false" style="width: 1457px; max-height: 261px;"><div class="textElement">  1×80 struct array with fields:
+
+    emg
+    pos
+    info
+    emgtime
+    postime</div></div></div></div></div><div  class = 'S6'><span>The </span><span style=' font-family: monospace;'>emg</span><span> field has </span><span style=' font-family: monospace;'>n</span><span> </span><span style=' font-family: monospace;'>*</span><span> </span><span style=' font-family: monospace;'>t</span><span> dimensions where </span><span style=' font-family: monospace;'>n</span><span> is the number of channels and </span><span style=' font-family: monospace;'>t</span><span> the number of time samples. Therefore the </span><span style=' font-family: monospace;'>emgtime</span><span> field has </span><span style=' font-family: monospace;'>t</span><span> samples. </span></div><div  class = 'S2'><span>Similarly the </span><span style=' font-family: monospace;'>postime</span><span> field has </span><span style=' font-family: monospace;'>k</span><span> samples and </span><span style=' font-family: monospace;'>pos</span><span> has </span><span style=' font-family: monospace;'>m</span><span> </span><span style=' font-family: monospace;'>*</span><span> </span><span style=' font-family: monospace;'>k</span><span> elements, where </span><span style=' font-family: monospace;'>m</span><span> is the number of channels.</span></div><div  class = 'S2'><span>The </span><span style=' font-family: monospace;'>info</span><span> field contains the information about the protocol and how the data have been collected. For example:</span></div><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S7'><span style="white-space: pre;"><span>disp(data(1).info)</span></span></div><div  class = 'S5'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="2609ACFB" data-testid="output_1" data-width="1427" data-height="73" data-hashorizontaloverflow="false" style="width: 1457px; max-height: 261px;"><div class="textElement">      plane: 1
+      start: 0
+     target: 1
+    t_onset: 0
+      t_end: 0.5100</div></div></div></div></div><div  class = 'S6'><span style=' font-family: monospace;'>plane</span><span> indicates the plane in which the targets were displayed (1-&gt;frontal, 2-&gt; sagittal).</span></div><div  class = 'S2'><span style=' font-family: monospace;'>start</span><span> indicates the target from which the movement started.</span></div><div  class = 'S2'><span style=' font-family: monospace;'>target</span><span> indicates the target to reach.</span></div><div  class = 'S2'><span style=' font-family: monospace;'>t_onset</span><span> indicates the time of the onset of the movement, (i.e. 10% of max speed).</span></div><div  class = 'S2'><span style=' font-family: monospace;'>t_end</span><span> indicates the time of the offset of the movement, (i.e. 10% of max speed after the peak).</span></div><div  class = 'S2'><span>NB: the software assumes that these fields are completed in the data structure.</span></div><h2  class = 'S1'><span>Time alignment                </span></h2><div  class = 'S2'><span>In addition EMG and kinematic data need to be aligned in time, preferably to the onset time, i.e. t_onset = 0.</span></div><h2  class = 'S1'><span>Trial duration</span></h2><div  class = 'S2'><span>In order to subtract the tonic component to the EMG signal and extract the phasic activity, trial duration should include 400ms before onset time and 400ms after the end of the movement.</span></div><div  class = 'S2'></div></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% Data Requirements
+%% Data Structure
+% The toolbox assumes data are organized in a specific structure. This is an 
+% example of the structure for a reaching paradigm.
+% 
+% Data for the demo are from the <https://doi.org/10.1152/jn.00379.2021 study> 
+% "Mixed matrix factorization: a novel algorithm for the extraction of kinematic-muscular 
+% synergies" by Alessandro Scano and collaborators, published in 2022 on Journal 
+% of Neurophysiology.
+% 
+% Here we selected a data subset of one participant, reaching towards 8 targets 
+% on the frontal plane. There are 10 repetitions of each trial.
+% 
+% Loading raw EMG  and kinematic data (reaching to 8 target in frontal plane)
+
+load('data.mat');
+disp(data)
+%% 
+% The |emg| field has |n| |*| |t| dimensions where |n| is the number of channels 
+% and |t| the number of time samples. Therefore the |emgtime| field has |t| samples. 
+% 
+% Similarly the |postime| field has |k| samples and |pos| has |m| |*| |k| elements, 
+% where |m| is the number of channels.
+% 
+% The |info| field contains the information about the protocol and how the data 
+% have been collected. For example:
+
+disp(data(1).info)
+%% 
+% |plane| indicates the plane in which the targets were displayed (1->frontal, 
+% 2-> sagittal).
+% 
+% |start| indicates the target from which the movement started.
+% 
+% |target| indicates the target to reach.
+% 
+% |t_onset| indicates the time of the onset of the movement, (i.e. 10% of max 
+% speed).
+% 
+% |t_end| indicates the time of the offset of the movement, (i.e. 10% of max 
+% speed after the peak).
+% 
+% NB: the software assumes that these fields are completed in the data structure.
+%% Time alignment                
+% In addition EMG and kinematic data need to be aligned in time, preferably 
+% to the onset time, i.e. t_onset = 0.
+%% Trial duration
+% In order to subtract the tonic component to the EMG signal and extract the 
+% phasic activity, trial duration should include 400ms before onset time and 400ms 
+% after the end of the movement.
+% 
+%
+##### SOURCE END #####
+--></body></html>
