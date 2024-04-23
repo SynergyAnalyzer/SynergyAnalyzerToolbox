@@ -241,6 +241,46 @@ classdef KinData
             
         end
         
+           %------------------------------------------------------------------
+        function obj = subtract(obj,opt)
+            % subtract baseline level to KIN data
+            
+            % set options or use defaults
+            defopt = obj.getDefSubtractOpt;
+            if nargin>1 && isstruct(opt)
+                fname = fieldnames(opt);
+                for i=1:length(fname)
+                    defopt.(fname{i}) = opt.(fname{i});
+                end
+            end
+            opt = defopt;
+            
+            % check options
+            nkin = length(obj);
+            
+            
+            % loop on trials
+            for i = 1:nkin
+                
+                switch opt.type
+                                                              
+                    case 'mean'
+                        obj(i).data = obj(i).data - mean(obj(i).data,2)*ones(1,size(obj(i).data,2));
+                        
+                end
+                
+            end
+            
+        end
+        
+        %------------------------------------------------------------------
+        function opt = getDefSubtractOpt(obj)
+            
+            opt.type = 'mean';    % subtract mean activity to get zeromean kin data
+                       
+        end
+        
+        
         %------------------------------------------------------------------
         function obj = selectCh(obj,chind)
             % select channels
@@ -531,6 +571,7 @@ classdef KinData
             %
             % figure and axes
             %
+            nkin = length(obj);
             nsect = length(opt.isect);
             if ~isfield(opt,'axes') | any(~ishandle(opt.axes)) | any(~strcmp(get(opt.axes,'type'),'axes'))
                 if isempty(opt.figure), hf = figure; else hf = figure(opt.figure); end

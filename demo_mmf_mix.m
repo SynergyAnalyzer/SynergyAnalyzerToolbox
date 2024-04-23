@@ -22,7 +22,7 @@ load('data.mat')
 info = getInfo(data);
 par.type = 'EmgKinData';
 par.chlabels = [emgchannels(:)', kinchannels(:)'];
-par.order = 2; % determines the order of the kinematic derivatives (0->position, 1->velocity, 2->acceleration) 
+par.order = 2; % determines the order of the kinematic derivatives (0->position, 1->velocity, 2->acceleration)
 par.delay = -0.05; % 50ms -> KIN data were anticipated of 50 ms to account for an estimated electromechanical delay between EMG and KIN (Scano et al. 2022)
 
 sa = SynergyAnalyzer(data,info,par);
@@ -59,7 +59,7 @@ plot(saf.data(ind),opt) % frontal plane, 8 directions
 saf = saf.emgPhasic;
 
 %% average data in groups of trials with same plane, start condition, direction
-saf.opt.average.gr = saf.groupTrials('type3',[1:8]' );  % type3 is the target number  
+saf.opt.average.gr = saf.groupTrials('type3',[1:8]' );  % type3 is the target number
 saf.opt.average.trange = [-.3 .7]; % time interval in s before and after onset for averaging
 sav = saf.average;
 
@@ -72,7 +72,7 @@ plot(sav.data(1:8),opt) % frontal plane, 8 directions
 disp('Press any key to normalize data for extracting synergies')
 disp('NB: once normalized data will be modified in the main structure')
 pause
-sav.opt.normalize.type = 32;
+sav.opt.normalize.type = 32; %normalize to abs(max) of each channel
 sav.opt.normalize.nonnegch = sav.data(1).nonnegch;
 sav = sav.normalize;
 
@@ -92,13 +92,34 @@ sav.opt.find.plot = 0;
 s1 = sav.find;
 
 %% plot R^2
-disp('Press any key to plot extracted spatial synergies')
-pause
+
 s1.opt.plot.type = 'rsq';
 plot(s1)
 
+%% select the number of synergies
+opt.type    = 'R2thresh';   % use R^2 threshold for selection of number of synergies
+opt.val     = 0.8;          % value of R^2 threshold
+% opt.type   = 'R2fit';        % use mse threshold of R^2 linear fit for selection of number of synergies
+% opt.val    = 1e-4;           % value of mse threshold
+Nsel = numsel(s1.syn,opt);
+fprintf('Number of synergies selected with as minimum number with R^2 higher than %4.2f: %i\n',opt.val,Nsel);
+
+prompt = 'Do you want to keep this selection? Y/N [Y]: ';
+str = input(prompt,'s');
+if isempty(str)
+    str = 'Y';
+end
+
+switch str
+  case 'Y'
+    fprintf('Using %i synergies\n',Nsel)
+  otherwise
+    Nsel = input('Enter the number of synergies\n');
+end
 %% plot synergies
-s1.opt.plot.N = input('Enter the number of synergies\n');
+disp('Press any key to plot extracted spatial synergies')
+pause
+s1.opt.plot.N = Nsel;
 cols = jet(s1.opt.plot.N);
 for i=1:s1.opt.plot.N
     colors{i} = cols(i,:);

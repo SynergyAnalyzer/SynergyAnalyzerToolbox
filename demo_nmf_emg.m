@@ -14,7 +14,7 @@ if verLessThan('matlab','7.6')
 end
 
 %% load data from file
-disp('Loading raw EMG data (reaching to 8 target in frontal and sagittal planes)')
+disp('Loading raw EMG data (reaching to 8 target in sagittal plane)')
 load('data.mat')
 
 %% create object and preprocess EMG data
@@ -78,15 +78,35 @@ sav.opt.find.niter = [5 5 1e-4 100]; % number of iterations or termination condi
 sav.opt.find.plot = 0;
 s1 = sav.find;
 
-%% plot spatial synergies
-disp('Press any key to plot extracted spatial synergies')
-pause
+%% plot R^2
 
 s1.opt.plot.type = 'rsq';
 plot(s1)
 
-%%
-s1.opt.plot.N = input('Enter the number of synergies\n');
+%% select the number of synergies
+opt.type    = 'R2thresh';   % use R^2 threshold for selection of number of synergies
+opt.val    = 0.8;           % value of R^2 threshold
+Nsel = numsel(s1.syn,opt);
+fprintf('Number of synergies selected with as minimum number with R^2 higher than %4.2f: %i\n',opt.val,Nsel);
+
+prompt = 'Do you want to keep this selection? Y/N [Y]: ';
+str = input(prompt,'s');
+if isempty(str)
+    str = 'Y';
+end
+
+switch str
+  case 'Y'
+    fprintf('Using %i synergies\n',Nsel)
+  otherwise
+    Nsel = input('Enter the number of synergies\n');
+end
+
+%% plot spatial synergies
+
+disp('Press any key to plot extracted spatial synergies')
+pause
+s1.opt.plot.N = Nsel;
 cols = jet(s1.opt.plot.N);
 for i=1:s1.opt.plot.N
     colors{i} = cols(i,:);

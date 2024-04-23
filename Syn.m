@@ -12,7 +12,8 @@
 % plot                  plot function
 % getDefPlotOpt         function to define the defaults of plot function
 % indmaxR               find set and repetition with max R^2 for N synergies
-% num                   return number of synergies
+% num                   return number of extracted synergies
+% numsel                return number of synergies selected with criterion
 %
 % Synergy Analyzer Toolbox for MATLAB: https://github.com/SynergyAnalyzer/SynergyAnalyzerToolbox.git
 % License: GNU GPL v3
@@ -136,10 +137,17 @@ classdef Syn
                             
                         case 'nmf' % Lee & Seung NMF algorithm with Eucledian cost
                             
-                            % initialize synergies and coefficients to uniform random
-                            % values in [0 1]
-                            Wini = rand(nch,N(iset));
-                            Cini = rand(N(iset),nsamp);
+                            % Change this manually
+                            if ~isempty(opt.Wini) && size(opt.Wini{N(iset)},2)==N(iset)
+                                disp('Using provided Wini')
+                                Wini = opt.Wini{N(iset)};
+                                Cini = rand(N(iset),nsamp);
+                            else
+                                % initialize synergies and coefficients to uniform random
+                                % values in [0 1]
+                                Wini = rand(nch,N(iset));
+                                Cini = rand(N(iset),nsamp);
+                            end
                             
                             % run algorithm
                             [W,C,R]=find_nmf(obj.data,Wini,Cini,opt);
@@ -205,6 +213,7 @@ classdef Syn
                     opt.plot = 1;
                     opt.updateW = 1;  % 0-> for data fitting
                     opt.clip  = 1;
+                    opt.Wini = []; % Change manually, fix W for data fitting
                     opt.print = 0;  % print message at each iteration
                 case 'mmf'
                     opt.niter    = [100 10 10^-6 100];  % number of iterations or termination condition and number of max iterations
@@ -502,6 +511,80 @@ classdef Syn
                         N(i) = size(obj.W{iset(i),1},2);
                 end
             end
+            
+        end
+        
+        %------------------------------------------------------------------
+        function Nsel = numsel(obj,opt)
+            % return optimal number of synergies selected according to criteria
+            % specified in opt
+            %
+                        
+
+            % set options or use defaults
+            defopt = obj.getDefNumselOpt;
+            if nargin>1 && isstruct(opt)
+                fname = fieldnames(opt);
+                for i=1:length(fname)
+                    defopt.(fname{i}) = opt.(fname{i});
+                end
+            end
+            opt = defopt;
+            
+            N = num(obj);
+            nset = length(N);
+
+            switch opt.type
+              case 'R2thresh'
+                [iset,irep] = indmaxR(obj,N);
+                for i=1:nset
+                  R(i) = obj.R(iset(i),irep(i));
+                end
+                isel = find(R>=opt.val);
+                if not(isempty(isel))
+                  Nsel = N(isel(1));
+                else
+                  Nsel = [];
+                  warning('Selection criteria not met!')
+                end
+              case 'R2fit'
+                i0=1;
+                iend = nset-1;
+                n = N(i0:iend);
+                [iset,irep] = indmaxR(obj,N);
+                for i=1:nset
+                  R(i) = obj.R(iset(i),irep(i));
+                end
+                for i=i0:iend
+                  x = N(i:end);
+                  y = R(i:end);
+                  p  = polyfit(x,y,1);
+                  yhat = polyval(p,x);
+                  sse = (y-yhat)*(y-yhat)';
+                  mse(i) = sse/length(x);
+                end
+                isel = find(mse<=opt.val);
+                if not(isempty(isel))
+                  Nsel = n(isel(1));
+                else
+                  Nsel = [];
+                  warning('Selection criteria not met!')
+                end
+            end
+
+        end
+         %------------------------------------------------------------------
+        function opt = getDefNumselOpt(obj)
+            % default options to select the number of synergies
+            
+            % type         val
+            % ----------------------
+            % 'R2thresh'  value of R^2 threshold
+            % 'R2fit'     value of linear fit mse threshold
+            % ----------------------
+           
+            opt.type    = 'R2thresh';   %R2fit
+            opt.val    = 0.8;           % 1e-4
             
         end
         

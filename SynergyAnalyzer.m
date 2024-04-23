@@ -64,7 +64,6 @@ classdef SynergyAnalyzer
             end
             
             
-            
             switch type
                 case  'EmgData'
                     obj.data = EmgData(data,[],chlabels);
@@ -154,6 +153,8 @@ classdef SynergyAnalyzer
                 warning('Movement onset and end events required for phasic EMGs')
                 return
             end
+            
+            opt.type = 'tonic';
             
             nsect = length(obj.info);
             for i=1:nsect

@@ -709,6 +709,7 @@ classdef EmgData
             %
             % figure and axes
             %
+            nemg = length(obj);
             nsect = length(opt.isect);
             if ~isfield(opt,'axes') | any(~ishandle(opt.axes)) | any(~strcmp(get(opt.axes,'type'),'axes'))
                 if isempty(opt.figure), hf = figure; else hf = figure(opt.figure); end
