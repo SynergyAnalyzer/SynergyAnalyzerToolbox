@@ -676,7 +676,7 @@ classdef KinData
             opt.kinsel = [1:nch];
             
             % isect
-            opt.isect = [1:8];
+            opt.isect = [1:nkin];
             
             % tref
             opt.tref = [];
