@@ -6,7 +6,7 @@ by Marta Russo, Alessandro Scano, Cristina Brambilla and Andrea d'Avella
 
 The [Synergy Analyzer Toolbox](https://github.com/SynergyAnalyzer/SynergyAnalyzerToolbox.git) for MATLAB is an open source software to extract muscle and kinematic synergies; see [LICENSE](https://github.com/SynergyAnalyzer/SynergyAnalyzerToolbox/blob/main/LICENSE) for the terms of the license (GNU GPL v3).
 
-A preprint is available at this [link](http://dx.doi.org/10.2139/ssrn.4665608).
+The paper "SynergyAnalyzer: A Matlab toolbox implementing mixed-matrix factorization to identify kinematic-muscular synergies" is available at this [link](https://doi.org/10.1016/j.cmpb.2024.108217).
 
 ## Description
 
@@ -22,7 +22,9 @@ Please refer to the [Getting Started](https://github.com/SynergyAnalyzer/Synergy
 ## How to Cite
 To support this toolbox and its authors, please cite the works listed below. Thanks very much for your support.
 
-Russo, Marta and Scano, Alessandro and Brambilla, Cristina and d'Avella, Andrea, Synergyanalyzer: A Matlab Toolbox Implementing Mixed-Matrix Factorization to Identify Kinematic-Muscular Synergies. Available at SSRN: https://ssrn.com/abstract=4665608 or http://dx.doi.org/10.2139/ssrn.4665608
+Marta Russo, Alessandro Scano, Cristina Brambilla, Andrea d'Avella,
+SynergyAnalyzer: A Matlab toolbox implementing mixed-matrix factorization to identify kinematic-muscular synergies,
+Computer Methods and Programs in Biomedicine, Volume 251, 2024, 108217, https://doi.org/10.1016/j.cmpb.2024.108217.
 
 ## Examples
 For more details check the [Getting Started](https://github.com/SynergyAnalyzer/SynergyAnalyzerToolbox/blob/main/GETTINGSTARTED.md#getting-started) Documentation page. 
